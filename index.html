@@ -4,16 +4,19 @@
     <title>Programancer</title>
     <script src="scripts/loader.js"></script>
     <script>
-      VERSION = "v0.0.2"
+      VERSION = "v0.0.3"
       window.addEventListener("load", function() {
         document.title += " " + VERSION;
       })
     </script>
+    <link type="text/css" rel="stylesheet" href="content/index.css" />
   </head>
   <body>
-    <canvas id="display">
-      If you're seeing this, your browser doesn't support HTML5 Canvas, or you have Javascript disabled. Fix either to play.
-    </canvas>
+    <div id="pageContainer">
+      <canvas id="display" width=640 height=640>
+        If you're seeing this, your browser doesn't support HTML5 Canvas, or you have Javascript disabled. Fix either to play.
+      </canvas>
+    </div>
     <script>
       require('events');
       require('render');
