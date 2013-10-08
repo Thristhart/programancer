@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>Programancer</title>
-    <script src="loader.js"></script>
+    <script src="scripts/loader.js"></script>
     <script>
-      VERSION = "v0.0.1"
+      VERSION = "v0.0.2"
       window.addEventListener("load", function() {
         document.title += " " + VERSION;
       })
@@ -14,6 +14,9 @@
     <canvas id="display">
       If you're seeing this, your browser doesn't support HTML5 Canvas, or you have Javascript disabled. Fix either to play.
     </canvas>
-    <script src="events.js"></script>
+    <script>
+      require('events');
+      require('render');
+    </script>
   </body>
 </html>
