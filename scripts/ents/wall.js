@@ -13,7 +13,7 @@ Wall.prototype.construct = function(x, y, color) {
   else
     this.color = "Black";
 }
-Wall.prototype.draw = function() {
-  context.fillStyle = this.color;
-  context.fillRect(this.x, this.y, WALL_WIDTH, WALL_HEIGHT);
+Wall.prototype.draw = function(ctx) {
+  ctx.fillStyle = this.color;
+  ctx.fillRect(this.x, this.y, WALL_WIDTH, WALL_HEIGHT);
 }
