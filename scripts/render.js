@@ -31,9 +31,36 @@ function renderLoop() {
   });
 }
 
+var cameraX = 0;
+var cameraY = 0;
+var cameraScale = 1;
+var cameraWidth = WIDTH;
+function translateCamera(xDiff, yDiff) {
+  cameraX += xDiff;
+  cameraY += yDiff;
+  context.translate(-xDiff, -yDiff);
+}
+
+function scaleCamera(scale) {
+  cameraScale *= scale;
+  context.scale(scale, scale);
+}
+
+function moveCameraTo(newX, newY) {
+  translateCamera(newX - cameraX, newY - cameraY);
+}
+
+function setCameraScale(newScale) {
+  scaleCamera(newScale / cameraScale);
+}
+
 
 function clear() {
-  context.clearRect(0, 0, WIDTH, HEIGHT);
+  context.clearRect(0, 0, (WIDTH + cameraX) / cameraScale, (HEIGHT + cameraY) / cameraScale);
 }
+
+canvas.addEventListener("renderLoop", function() {
+  context.drawImage(backgroundCanvas, 0, 0);
+});
 
 renderLoop();
