@@ -30,4 +30,5 @@ Entity.child = function() {
   return child;
 }
 
+require('ents/background_element');
 require('ents/wall');

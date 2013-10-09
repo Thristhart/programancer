@@ -1,7 +1,7 @@
 var WALL_WIDTH = 50;
 var WALL_HEIGHT = WALL_WIDTH;
 
-Wall = Entity.child();
+Wall = BackgroundElement.child();
 
 
 Wall.prototype.construct = function(x, y, color) {
