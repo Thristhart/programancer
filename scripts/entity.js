@@ -1,13 +1,8 @@
 
-// The way I'm handling arguments is stupid and ugly!
-// The reasoning behind it is that I want prototype.construct() to have variable amounts of args
-// and not have to deal with the ugliness of an array.
-// I am being ugly here so that I am not ugly in all the children of entity
-function Entity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
-  this.construct(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+function Entity() {
+  this.construct.apply(this, arguments);
 
   this.registerListener();
-
 }
 Entity.prototype.construct = function(x, y) {
   this.x = x;
