@@ -32,3 +32,4 @@ Entity.child = function() {
 
 require('ents/background_element');
 require('ents/wall');
+require('ents/fps_counter');
