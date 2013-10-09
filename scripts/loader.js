@@ -30,13 +30,10 @@ var requireTargets = [];
 function require(scriptName) {
   var filename = scriptName + ".js";
 
-  if(requireTargets.length == 0)
+  requireTargets.push(filename);
+  if(requireTargets.length == 1)
   {
     doLoad(filename);
-  }
-  else
-  {
-    requireTargets.push(filename);
   }
 }
 
@@ -46,6 +43,6 @@ function doLoad(filename) {
 }
 
 eventDOMTracker.addEventListener("scriptLoad", function(event) { 
-  if(requireTargets.unshift() && requireTargets.length > 0)
+  if(requireTargets.shift() && requireTargets.length > 0)
     doLoad(requireTargets[0]);
 });
