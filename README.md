@@ -3,9 +3,9 @@ Programancer is a game in which the player plays as a programmer trapped in the 
 Levels are top-down dungeon-crawler style, with fixed gridbased obstacles and unfixed integer movement.
 
 Difficulty levels:
-  Easy: Craft spells on the fly through a paused menu
-  Medium: Prepare spells before attempting the level
-  Hard: Prepare spells, and spells are projectiles that must be aimed
+- Easy: Craft spells on the fly through a paused menu
+- Medium: Prepare spells before attempting the level
+- Hard: Prepare spells, and spells are projectiles that must be aimed
 
 All entities in the game are based on triggering events - "onRender", "onMove", "onTakeDamage", etc. Each has an associated "frequency" cost - the more frequent, the higher cost
 
