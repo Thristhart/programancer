@@ -10,9 +10,14 @@ Entity.prototype.construct = function(x, y) {
 }
 Entity.prototype.registerListener = function() {
   var me = this;
-  canvas.addEventListener("renderLoop", function(event) {
+  this.listener = function(event) {
     me.draw(context, event);
-  });
+  };
+
+  canvas.addEventListener("renderLoop", this.listener);
+}
+Entity.prototype.removeListener = function() {
+  canvas.removeEventListener("renderLoop", this.listener);
 }
 
 Entity.prototype.draw = function(ctx) {
