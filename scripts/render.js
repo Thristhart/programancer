@@ -8,6 +8,11 @@ var HEIGHT = 600;
 
 function triggerRenderEvents() {
   clear(); // clear the screen before rendering
+
+  context.save();
+  context.translate(-cameraX, -cameraY);
+  context.scale(cameraScale, cameraScale);
+
   var renderEvent = new CustomEvent("renderLoop", {
     detail: {milliseconds: new Date().getTime()},
     bubbles: false
@@ -38,12 +43,10 @@ var cameraWidth = WIDTH;
 function translateCamera(xDiff, yDiff) {
   cameraX += xDiff;
   cameraY += yDiff;
-  context.translate(-xDiff, -yDiff);
 }
 
 function scaleCamera(scale) {
   cameraScale *= scale;
-  context.scale(scale, scale);
 }
 
 function moveCameraTo(newX, newY) {
@@ -56,11 +59,21 @@ function setCameraScale(newScale) {
 
 
 function clear() {
-  context.clearRect(0, 0, (WIDTH + cameraX) / cameraScale, (HEIGHT + cameraY) / cameraScale);
+  context.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
 canvas.addEventListener("renderLoop", function() {
   context.drawImage(backgroundCanvas, 0, 0);
 });
+
+var renderCleanupEvent;
+function registerRenderCleanup() {
+  if(renderCleanupEvent)
+    canvas.removeEventListener("renderLoop", renderCleanupEvent);
+
+  canvas.addEventListener("renderLoop", function() {
+    context.restore();
+  });
+}
 
 renderLoop();
