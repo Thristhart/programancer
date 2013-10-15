@@ -1,9 +1,11 @@
-var prefix = "/programancer/scripts/"
+
+var scriptPrefix = "/programancer/scripts/";
+var levelPrefix = "/programancer/content/levels/";
 
 var eventDOMTracker = document.createElement("div");
 
 
-function createScriptElement(filename) {
+function createScriptElement(prefix, filename, callback) {
   var script = document.createElement("script");
   script.src = prefix + filename;
 
@@ -18,31 +20,48 @@ function createScriptElement(filename) {
     });
     
     eventDOMTracker.dispatchEvent(scriptLoadEvent);
-
+    if(callback)
+      callback(filename);
   });
 
 
   document.body.appendChild(script);
+  return script;
 }
 
 
 var requireTargets = [];
-function require(scriptName) {
-  var filename = scriptName + ".js";
+function require(scriptName, type, callback) {
+  if(!type)
+    type = "script";
 
-  requireTargets.push(filename);
+  var scriptData = {};
+  scriptData.filename = scriptName + ".js";
+  scriptData.type = type;
+  scriptData.callback = callback;
+
+  requireTargets.push(scriptData);
   if(requireTargets.length == 1)
   {
-    doLoad(filename);
+    doLoad(scriptData.type, scriptData.filename, scriptData.callback);
   }
 }
 
 // seperated to another function to allow room for activities
-function doLoad(filename) {
-  createScriptElement(filename);
+function doLoad(type, filename, callback) {
+  var prefix;
+  switch(type) {
+    case "script":
+      prefix = scriptPrefix;
+      break;
+    case "level":
+      prefix = levelPrefix;
+      break;
+  }
+  createScriptElement(prefix, filename, callback);
 }
 
 eventDOMTracker.addEventListener("scriptLoad", function(event) { 
   if(requireTargets.shift() && requireTargets.length > 0)
-    doLoad(requireTargets[0]);
+    doLoad(requireTargets[0].type, requireTargets[0].filename, requireTargets[0].callback);
 });

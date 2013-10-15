@@ -3,6 +3,9 @@ function Level(width, height) {
   this.height = height;
 
   this.buildWallArray();
+
+  backgroundCanvas.width = width * WALL_WIDTH;
+  backgroundCanvas.height = height * WALL_HEIGHT;
 }
 
 Level.prototype.buildWallArray = function() {
@@ -11,6 +14,16 @@ Level.prototype.buildWallArray = function() {
     this.walls[x] = [];
     for(var y = 0; y < this.height; y++) {
       this.walls[x][y] = null;
+    }
+  }
+}
+
+Level.prototype.destroy = function() {
+  for(var x = 0; x < this.width; x++) {
+    for(var y = 0; y < this.height; y++) {
+      var wall = this.walls[x][y];
+      if(wall)
+        wall.removeListener();
     }
   }
 }
@@ -37,4 +50,18 @@ Level.prototype.fromStringArray = function(lines) {
         this.addWall(x, y, type);
     }
   }
+}
+var currentLevel;
+Level.load = function(name) {
+  var lastLevel;
+  if(currentLevel)
+    lastLevel = currentLevel;
+  require(name, 'level', function() {
+    if(lastLevel) {
+      lastLevel.destroy();
+      delete(lastLevel);
+    }
+    registerRenderCleanup();
+    triggerBackgroundRender();
+  });
 }
