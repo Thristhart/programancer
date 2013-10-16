@@ -1,3 +1,4 @@
+var interactible_entities = [];
 
 function Entity() {
   this.construct.apply(this, arguments);
@@ -7,6 +8,9 @@ function Entity() {
 Entity.prototype.construct = function(x, y) {
   this.x = x;
   this.y = y;
+
+  this.width = 10;
+  this.height = 10;
 }
 Entity.prototype.registerListener = function() {
   var me = this;
