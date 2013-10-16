@@ -5,10 +5,13 @@ var levelPrefix = "/programancer/content/levels/";
 var eventDOMTracker = document.createElement("div");
 
 
-function createScriptElement(prefix, filename, callback) {
+function createScriptElement(prefix, filename, callback, weight) {
   var script = document.createElement("script");
   script.src = prefix + filename;
 
+  loadTarget += weight;
+
+  showLoadingBar(); // we're loading something, so illustrate that
 
   script.addEventListener("load", function() { 
     var scriptLoadEvent = new CustomEvent("scriptLoad", {
@@ -19,6 +22,9 @@ function createScriptElement(prefix, filename, callback) {
       cancelable: false
     });
     
+    loadedSoFar += weight;
+    updateLoadingBar();
+
     eventDOMTracker.dispatchEvent(scriptLoadEvent);
     if(callback)
       callback(filename);
@@ -31,24 +37,27 @@ function createScriptElement(prefix, filename, callback) {
 
 
 var requireTargets = [];
-function require(scriptName, type, callback) {
+function require(scriptName, type, callback, weight) {
   if(!type)
     type = "script";
+  if(!weight)
+    weight = 1;
 
   var scriptData = {};
   scriptData.filename = scriptName + ".js";
   scriptData.type = type;
   scriptData.callback = callback;
+  scriptData.weight = weight;
 
   requireTargets.push(scriptData);
   if(requireTargets.length == 1)
   {
-    doLoad(scriptData.type, scriptData.filename, scriptData.callback);
+    doLoad(scriptData.type, scriptData.filename, scriptData.callback, scriptData.weight);
   }
 }
 
 // seperated to another function to allow room for activities
-function doLoad(type, filename, callback) {
+function doLoad(type, filename, callback, weight) {
   var prefix;
   switch(type) {
     case "script":
@@ -58,10 +67,10 @@ function doLoad(type, filename, callback) {
       prefix = levelPrefix;
       break;
   }
-  createScriptElement(prefix, filename, callback);
+  createScriptElement(prefix, filename, callback, weight);
 }
 
 eventDOMTracker.addEventListener("scriptLoad", function(event) { 
   if(requireTargets.shift() && requireTargets.length > 0)
-    doLoad(requireTargets[0].type, requireTargets[0].filename, requireTargets[0].callback);
+    doLoad(requireTargets[0].type, requireTargets[0].filename, requireTargets[0].callback, requireTargets[0].weight);
 });
