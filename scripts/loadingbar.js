@@ -15,5 +15,4 @@ function updateLoadingBar() {
   setLoadingBar((loadedSoFar / loadTarget) * 100);
   if(loadedSoFar == loadTarget)
     hideLoadingBar();
-  console.log(loadedSoFar, loadTarget);
 }
