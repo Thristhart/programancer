@@ -1,17 +1,20 @@
 var interactible_entities = [];
 
 function Entity() {
-  this.construct.apply(this, arguments);
+  for(var i = 0; i < this.constructors.length; i++) {
+    this.constructors[i].apply(this, arguments);
+  }
 
   this.registerListener();
 }
-Entity.prototype.construct = function(x, y) {
+Entity.prototype.constructors = [];
+Entity.prototype.constructors.push(function(x, y) {
   this.x = x;
   this.y = y;
 
   this.width = 10;
   this.height = 10;
-}
+});
 Entity.prototype.registerListener = function() {
   var me = this;
   this.listener = function(event) {
@@ -35,10 +38,22 @@ Entity.child = function() {
   var child = function() {
     return target.apply(this, arguments);
   };
+  
   child.prototype = Object.create(target.prototype);
+  // ensure that children have a seperate reference for constructors
+  child.prototype.constructors = clone_array(target.prototype.constructors); 
+
   child.child = Entity.child; // making sure children can have children
 
   return child;
+}
+
+function clone_array(targetArray) {
+  var clone = [];
+  for(var i = 0; i < targetArray.length; i++) {
+    clone.push(targetArray[i]);
+  }
+  return clone;
 }
 
 require('ents/background_element');

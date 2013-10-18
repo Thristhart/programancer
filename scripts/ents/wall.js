@@ -3,11 +3,7 @@ var WALL_HEIGHT = WALL_WIDTH;
 
 Wall = BackgroundElement.child();
 
-
-Wall.prototype.construct = function(x, y, color) {
-  this.x = x;
-  this.y = y;
-
+Wall.prototype.constructors.push(function(x, y, color) {
   this.width = WALL_WIDTH;
   this.height = WALL_HEIGHT;
 
@@ -17,7 +13,7 @@ Wall.prototype.construct = function(x, y, color) {
     this.color = "Black";
   
   interactible_entities.push(this);
-}
+});
 Wall.prototype.draw = function(ctx) {
   ctx.fillStyle = this.color;
   ctx.fillRect(this.x, this.y, WALL_WIDTH, WALL_HEIGHT);

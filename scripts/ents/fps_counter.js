@@ -1,12 +1,10 @@
 FPSCounter = Entity.child();
 
-FPSCounter.prototype.construct = function(x, y) {
-  this.x = x;
-  this.y = y;
+FPSCounter.prototype.constructors.push(function() {
   this.samples = [60, 60, 60, 60, 60, 60, 60, 60, 60, 60];
   this.avgFPS = 60;
   this.lastSampleMilliseconds = 0;
-}
+});
 FPSCounter.prototype.draw = function(ctx, renderEvent) {
   var fps = 60;
 
