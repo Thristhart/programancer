@@ -24,6 +24,7 @@ function triggerBackgroundRender() {
     detail: {milliseconds: new Date().getTime()},
     bubbles: false
   });
+  backgroundCanvas.width = backgroundCanvas.width; // clear the background
   canvas.dispatchEvent(renderEvent);
 }
 
