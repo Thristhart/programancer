@@ -31,8 +31,30 @@ Vector.prototype.setRadians = function(newRadians) {
   this.y = Math.sin(newRadians) * this.magnitude;
 
   this.radians = newRadians;
-  this.degrees = Math.PI/180 * newRadians;
+  this.degrees = 180/Math.PI * newRadians;
 }
 Vector.prototype.setDegrees = function(newDegrees) {
-  this.setRadians(180/Math.PI * newDegrees);
+  this.setRadians(Math.PI/180 * newDegrees);
+}
+
+Vector.prototype.getDegrees = function() {
+  return this.degrees = this.getRadians() * 180/Math.PI;
+}
+
+Vector.prototype.getRadians = function() {
+  return this.radians = Math.atan2(this.y, this.x);
+}
+
+Vector.prototype.normalize = function() {
+  var unit = this.getUnit();
+
+  this.set(unit.x, unit.y);
+}
+
+Vector.prototype.set = function(x, y) {
+  this.x = x;
+  this.y = y;
+
+  this.getMagnitude();
+  this.getDegrees();
 }
