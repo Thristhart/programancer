@@ -29,7 +29,7 @@ Entity.prototype.removeListener = function() {
 
 Entity.prototype.draw = function(ctx) {
   ctx.fillStyle = "black";
-  ctx.fillRect(this.x, this.y, 20, 20);
+  ctx.fillRect(this.x, this.y, this.width, this.height);
 }
 
 Entity.child = function() {
