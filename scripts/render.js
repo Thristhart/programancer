@@ -37,26 +37,6 @@ function renderLoop() {
   });
 }
 
-var cameraX = 0;
-var cameraY = 0;
-var cameraScale = 1;
-var cameraWidth = WIDTH;
-function translateCamera(xDiff, yDiff) {
-  cameraX += xDiff;
-  cameraY += yDiff;
-}
-
-function scaleCamera(scale) {
-  cameraScale *= scale;
-}
-
-function moveCameraTo(newX, newY) {
-  translateCamera(newX - cameraX, newY - cameraY);
-}
-
-function setCameraScale(newScale) {
-  scaleCamera(newScale / cameraScale);
-}
 
 
 function clear() {
@@ -77,4 +57,3 @@ function registerRenderCleanup() {
   });
 }
 
-renderLoop();
