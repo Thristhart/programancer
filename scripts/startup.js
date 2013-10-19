@@ -1,0 +1,2 @@
+startTick();
+renderLoop();

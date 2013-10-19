@@ -56,9 +56,3 @@ function clone_array(targetArray) {
   return clone;
 }
 
-require('vector');
-require('ents/moving');
-require('ents/controllable');
-require('ents/background_element');
-require('ents/wall');
-require('ents/fps_counter');

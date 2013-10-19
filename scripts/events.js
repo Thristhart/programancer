@@ -9,6 +9,9 @@ function triggerTick() {
   lastTickTime = curTime;
 }
 
-var tickLoop = setInterval(triggerTick, 16.667);
+var tickLoop;
+function startTick() {
+  tickLoop = setInterval(triggerTick, 16.667);
+}
 
 var tickRegister = document.createElement("div");
