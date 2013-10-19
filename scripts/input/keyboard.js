@@ -9,23 +9,27 @@ canvas.addEventListener("keydown", function(event) {
   switch(event.keyCode) {
     case 37: // Left Arrow
     case 65: // A
+      if(!keyStatus.LEFT)
+        movement = true;
       keyStatus.LEFT = true;
-      movement = true;
       break;
     case 38: // Up Arrow
     case 87: // W
+      if(!keyStatus.UP)
+        movement = true;
       keyStatus.UP = true;
-      movement = true;
       break;
     case 39: // Right Arrow
     case 68: // D
+      if(!keyStatus.RIGHT)
+        movement = true;
       keyStatus.RIGHT = true;
-      movement = true;
       break;
     case 40: // Down Arrow
     case 83: // S
+      if(!keyStatus.DOWN)
+        movement = true;
       keyStatus.DOWN = true;
-      movement = true;
       break;
   }
   if(movement)
