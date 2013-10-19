@@ -9,6 +9,7 @@ var HEIGHT = 600;
 function triggerRenderEvents() {
   clear(); // clear the screen before rendering
 
+  focusCamera();
   context.save();
   context.translate(-cameraX, -cameraY);
   context.scale(cameraScale, cameraScale);
