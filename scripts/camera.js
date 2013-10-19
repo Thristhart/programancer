@@ -43,6 +43,8 @@ function focusCamera() {
     cameraY = 0;
   if(botEdge > currentLevel.height * WALL_HEIGHT)
     cameraY -= botEdge - (currentLevel.height * WALL_HEIGHT);
+
+  Math.round(cameraX);
+  Math.round(cameraY);
 }
 
-canvas.addEventListener("renderLoop", focusCamera);
