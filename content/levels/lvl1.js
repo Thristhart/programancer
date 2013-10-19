@@ -31,3 +31,5 @@ currentLevel.fromStringArray([
     "x............................x",
     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 ]);
+
+createPlayerAt(3, 3);
