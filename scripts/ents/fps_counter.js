@@ -25,7 +25,7 @@ FPSCounter.prototype.draw = function(ctx, renderEvent) {
   
   context.fillStyle = "red";
   context.font = "14pt Segoe UI";
-  context.fillText(Math.floor(this.avgFPS), this.x, this.y, 40);
+  context.fillText(Math.floor(this.avgFPS), this.x + cameraX, this.y + cameraY, 40);
 };
 
 var FPS = new FPSCounter(0, 20);
