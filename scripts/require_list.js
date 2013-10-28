@@ -10,6 +10,8 @@ require('input/mouse');
 require('input/keyboard');
 
 require('vector');
+
+require('mixins/collision');
 require('entity');
   require('ents/moving');
     require('ents/controllable');
