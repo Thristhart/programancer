@@ -53,8 +53,9 @@ function registerRenderCleanup() {
   if(renderCleanupEvent)
     canvas.removeEventListener("renderLoop", renderCleanupEvent);
 
-  canvas.addEventListener("renderLoop", function() {
+  renderCleanupEvent = function() {
     context.restore();
-  });
+  };
+  canvas.addEventListener("renderLoop", renderCleanupEvent);
 }
 
