@@ -32,6 +32,14 @@ Entity.prototype.draw = function(ctx) {
   ctx.fillRect(this.x, this.y, this.width, this.height);
 }
 
+Entity.extend = function(target) {
+  for (var property in target) {
+    if (target.hasOwnProperty(property)) {
+      this.prototype[property] = target[property];
+    }
+  }
+}
+
 Entity.child = function() {
   // NOTE: this is NOT a flexible function. it should apply to all cases of Entity but use caution
   var target = this;
@@ -44,6 +52,7 @@ Entity.child = function() {
   child.prototype.constructors = clone_array(target.prototype.constructors); 
 
   child.child = Entity.child; // making sure children can have children
+  child.extend = Entity.extend; // children can be extended
 
   return child;
 }
