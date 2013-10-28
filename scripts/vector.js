@@ -5,7 +5,14 @@ function Vector(x, y) {
   this.getMagnitude();
 }
 
-
+Vector.findShortest = function(vectorArray) {
+  var shortest = vectorArray[0];
+  for(var i = 1; i < vectorArray.length; i++) {
+    if(vectorArray[i].magnitude < shortest.magnitude)
+      shortest = vectorArray[i];
+  }
+  return shortest;
+}
 Vector.prototype.getMagnitude = function() {
   this.magnitude = Math.sqrt(this.x * this.x + this.y * this.y);
 
@@ -57,4 +64,16 @@ Vector.prototype.set = function(x, y) {
 
   this.getMagnitude();
   this.getDegrees();
+}
+
+Vector.prototype.minus = function(other) {
+  return new Vector(this.x - other.x, this.y - other.y);
+}
+
+Vector.prototype.plus = function(other) {
+  return new Vector(this.x + other.x, this.y + other.y);
+}
+
+Vector.prototype.scalar = function(scalar) {
+  return new Vector(scalar * this.x, scalar * this.y);
 }
