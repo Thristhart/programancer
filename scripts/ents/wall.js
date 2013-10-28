@@ -10,9 +10,7 @@ Wall.prototype.constructors.push(function(x, y, color) {
   if(color)
     this.color = color;
   else
-    this.color = "Black";
-  
-  interactible_entities.push(this);
+    this.color = "Black"
 });
 Wall.prototype.draw = function(ctx) {
   ctx.fillStyle = this.color;
