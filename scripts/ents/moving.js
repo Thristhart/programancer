@@ -20,6 +20,8 @@ MovingEntity.prototype.update_functions.push(function(time) {
   if(this.x != this.oldX || this.y != this.oldY) {
     this.checkCollision();
   }
+});
+MovingEntity.prototype.onCollide = function(other) {
 }
 
 MovingEntity.prototype.checkCollision = function() {
@@ -56,5 +58,6 @@ MovingEntity.prototype.checkCollisionAgainstEnt = function(entity) {
       me.x = me.oldX;
       me.y = me.oldY;
     }
+    this.onCollide(entity);
   }
 }
