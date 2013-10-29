@@ -15,6 +15,16 @@ Entity.prototype.constructors.push(function(x, y) {
   this.width = 10;
   this.height = 10;
 });
+Entity.prototype.update_functions = [];
+Entity.prototype.constructors.push(function() {
+  var me = this;
+  tickRegister.addEventListener("tick", function(event) {
+    for(var i = 0; i < me.update_functions.length; i++) {
+      me.update_functions[i].apply(me, [event.detail.time]);
+    }
+  });
+});
+
 Entity.prototype.registerListener = function() {
   var me = this;
   this.listener = function(event) {
@@ -50,6 +60,7 @@ Entity.child = function() {
   child.prototype = Object.create(target.prototype);
   // ensure that children have a seperate reference for constructors
   child.prototype.constructors = clone_array(target.prototype.constructors); 
+  child.prototype.update_functions = clone_array(target.prototype.update_functions);
 
   child.child = Entity.child; // making sure children can have children
   child.extend = Entity.extend; // children can be extended

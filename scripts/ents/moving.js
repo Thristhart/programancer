@@ -10,12 +10,8 @@ MovingEntity.prototype.constructors.push(function(x, y) {
   this.speed = 0;
 
   var me = this;
-  tickRegister.addEventListener("tick", function(event) {
-    me.doMovement(event.detail.time);
-  });
 });
-
-MovingEntity.prototype.doMovement = function(time) {
+MovingEntity.prototype.update_functions.push(function(time) {
   this.oldX = this.x;
   this.oldY = this.y;
   this.x += this.facing.x * this.speed * time;
